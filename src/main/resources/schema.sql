@@ -1,0 +1,11 @@
+-- CREATE TABLE book (
+--     id SERIAL PRIMARY KEY,
+--     title TEXT NOT NULL,
+--     author TEXT NOT NULL
+-- )
+
+-- UPDATE Users
+-- SET email  = 'mietek@gmail.com',
+--     name= 'Papaj',
+--     surname= 'Ciapara'
+-- WHERE username = 'Matty';

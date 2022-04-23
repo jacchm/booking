@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: "project-web-application"
+  sql:
+    init:
+      mode: always
+      platform: postgres
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/project-webapp
+    username: postgres
+    password: "${Password}"
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+#      uri: mongodb://jacchm:Simnes49is@webapp-west.vpxip.mongodb.net/webapp
