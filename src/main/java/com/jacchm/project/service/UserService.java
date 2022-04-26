@@ -51,7 +51,7 @@ public class UserService implements ReactiveUserDetailsService {
     return userRepository
         .findAll()
         .doOnError(error -> log.error(USER_NOT_FOUND_ERROR_MSG, error.getMessage()))
-        .map(userMapper::mapUserToUserDTO)
+        .map(userMapper::mapToUserDTO)
         .collectList();
   }
 
@@ -59,12 +59,12 @@ public class UserService implements ReactiveUserDetailsService {
     return userRepository
         .findByUsername(username)
         .doOnError(error -> log.error(USER_NOT_FOUND_ERROR_MSG, error.getMessage()))
-        .map(userMapper::mapUserToUserDTO);
+        .map(userMapper::mapToUserDTO);
   }
 
   public Mono<Void> createUser(final UserCreationDTO userCreationDTO) {
     return Mono.just(userCreationDTO)
-        .map(userMapper::mapUserCreationDTOtoUser)
+        .map(userMapper::mapToUser)
         .map(this::encodeUserPasswordWithBCrypt)
         .flatMap(userRepository::save)
         .doOnError(error -> log.error(USER_ERROR_MSG, userCreationDTO.getUsername(),

@@ -17,10 +17,10 @@ public interface UserMapper {
   String GRAND_AUTHORITIES_SEPARATOR = ",";
 
   @Mapping(source = "userCreationDTO.roles", target = "authorities")
-  User mapUserCreationDTOtoUser(final UserCreationDTO userCreationDTO);
+  User mapToUser(final UserCreationDTO userCreationDTO);
 
   @Mapping(target = "authorities", expression = "java(mapAuthoritiesListToString(user.getAuthorities()))")
-  UserDTO mapUserToUserDTO(final User user);
+  UserDTO mapToUserDTO(final User user);
 
   default String mapAuthoritiesListToString(final Collection<? extends GrantedAuthority> authorities) {
     return authorities
