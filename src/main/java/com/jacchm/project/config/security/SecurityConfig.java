@@ -35,7 +35,6 @@ public class SecurityConfig {
         .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
         .authenticationManager(reactiveAuthenticationManager)
         .authorizeExchange()
-        .pathMatchers("/trainings/**").hasRole("USER")
         .pathMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
         .pathMatchers(HttpMethod.GET, "/users/**").hasRole("ADMIN")
         .anyExchange().permitAll()

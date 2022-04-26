@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
@@ -22,7 +23,7 @@ public class UserController {
   private final UserService userService;
 
   @PostMapping
-  public Mono<ResponseEntity<Void>> register(@RequestBody final UserCreationDTO userCreationDTO) {
+  public Mono<ResponseEntity<Void>> register(@Valid @RequestBody final UserCreationDTO userCreationDTO) {
     log.info("Received registration request with user data={}", userCreationDTO);
     return userService.createUser(userCreationDTO)
         .then(Mono.just(ResponseEntity.status(HttpStatus.CREATED).build()));
@@ -34,6 +35,8 @@ public class UserController {
         .map(ResponseEntity::ok);
   }
 
+  //  @PreAuthorize(value = "hasRole('ROLE_ADMIN')") or ADMIN
+//  @RolesAllowed(value = "ROLE_ADMIN")
   @GetMapping("{username}")
   public Mono<ResponseEntity<UserDTO>> getUser(@PathVariable final String username) {
     return userService.getUser(username)

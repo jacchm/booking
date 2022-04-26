@@ -30,10 +30,7 @@ public class GlobalExceptionWrapper extends DefaultErrorAttributes {
 
     final Map<String, Object> errorAttributes = super.getErrorAttributes(request,
         options.including(ErrorAttributeOptions.Include.MESSAGE, ErrorAttributeOptions.Include.EXCEPTION));
-    errorAttributes.remove(REQUEST_ID);
-    errorAttributes.remove(EXCEPTION);
-    errorAttributes.remove(PATH);
-    errorAttributes.remove(TIMESTAMP);
+    cleanErrorAttributes(errorAttributes);
     if (error instanceof DomainException) {
       final HttpStatus errorStatus = ((DomainException) error).getStatus();
       errorAttributes.replace(ErrorAttribute.STATUS.value, errorStatus.value());
@@ -54,6 +51,13 @@ public class GlobalExceptionWrapper extends DefaultErrorAttributes {
     }
 
     return errorAttributes;
+  }
+
+  private void cleanErrorAttributes(final Map<String, Object> errorAttributes) {
+    errorAttributes.remove(REQUEST_ID);
+    errorAttributes.remove(EXCEPTION);
+    errorAttributes.remove(PATH);
+    errorAttributes.remove(TIMESTAMP);
   }
 
   @AllArgsConstructor
