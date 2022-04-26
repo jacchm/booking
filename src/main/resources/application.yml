@@ -6,10 +6,6 @@ spring:
       mode: always
       platform: postgres
   r2dbc:
-    url: r2dbc:postgresql://localhost:5432/project-webapp
+    url: r2dbc:postgresql://localhost:5432/booking
     username: postgres
     password: "${Password}"
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017
-#      uri: mongodb://jacchm:Simnes49is@webapp-west.vpxip.mongodb.net/webapp
